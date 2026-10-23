@@ -1,6 +1,6 @@
 
 
-const inputText = document.querySelector('input');
+const inputText = document.querySelector('.input-text');
 const answerText = inputText.textContent
 document.querySelector()
 function length() {

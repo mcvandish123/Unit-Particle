@@ -4,26 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="style.css">
-  <title>Document</title>
+  <title>Unit Converter - Length</title>
 </head>
 <body>
-  <header>
-    <a href="length.html" id="links">Length</a>
-    <a href="weight.html" id="links">Weight</a>
-    <a href="temperature.html" id="links">Temperature</a>
-  </header>
-  <form>
-    <label for="input-text">Enter the length to convert: </label>
-    <input type="text" class="input-text">
+  <main class="card">
+    <h1 class="title">Unit Converter</h1>
 
-    <label for="input-from">Unit to Convert from: </label>
-    <input type="text" class="input-from">
+    <nav class="nav">
+      <a href="length.html" class="nav-link active">Length</a>
+      <a href="weight.html" class="nav-link">Weight</a>
+      <a href="Temperature.html" class="nav-link">Temperature</a>
+    </nav>
 
-    <label for="input-to">Unit to Convert to: </label>
-    <input type="text" class="input-to">
+    <form class="converter-form">
+      <label for="input-text">Enter the length to convert</label>
+      <input type="text" id="input-text" class="input-text">
 
-    <button class="button-length">Convert</button>
-  </form>
+      <label for="input-from">Unit to Convert from</label>
+      <input type="text" id="input-from" class="input-from">
+
+      <label for="input-to">Unit to Convert to</label>
+      <input type="text" id="input-to" class="input-to">
+
+      <button class="button button-length">Convert</button>
+    </form>
+
+    <section class="result hidden">
+      <p class="result-label">Result of your calculation</p>
+      <p class="result-text"></p>
+      <button class="button button-reset">Reset</button>
+    </section>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>
