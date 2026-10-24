@@ -41,25 +41,62 @@ resetButton.addEventListener('click', () => {
   inputText.focus();
 });
 
-// Each converter receives the number and the two unit names, and should return the converted number
 function length(value, from, to) {
-  let millimeter;
-  let centimeter;
-  let meter;
-  let kilometer;
-  let inch;
-  let foot;
-  let yard;
-  let mile;
-
+  const lengthConvert = {
+    mm: {
+      mm: 1,
+      cm: 0.1,
+      m: 0.001,
+      km: 0.000001
+    },
+    cm: {
+      mm: 10,
+      cm: 1,
+      m: 0.01,
+      km: 0.00001
+    },
+    m: {
+      mm: 1000,
+      cm: 100,
+      m: 1,
+      km: 0.001
+    },
+    km: {
+      mm: 0.000001,
+      cm: 100000,
+      m: 1000,
+      km: 1
+    }
+  }
 }
 
 function weight(value, from, to) {
-  let milligram;
-  let gram;
-  let kilogram;
-  let ounce;
-  let pound;
+  const weightConvert = {
+    mg: {
+      mg: 1,
+      g: 0.001,
+      kg: 0.000001,
+      oz: 0.000035274,
+    },
+    g: {
+      mg: 1,
+      g: 0.001,
+      kg: 0.000001,
+      oz: 0.000035274,
+    },
+    kg: {
+      mg: 1,
+      g: 0.001,
+      kg: 0.000001,
+      oz: 0.000035274,
+    },
+    oz: {
+      mg: 1,
+      g: 0.001,
+      kg: 0.000001,
+      oz: 0.000035274,
+    }
+  }
 }
 
 function temperature(value, from, to) {
