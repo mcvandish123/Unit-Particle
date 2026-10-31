@@ -1,6 +1,7 @@
 
 
 const form = document.querySelector('.converter-form');
+
 const inputText = document.querySelector('.input-text');
 const inputFrom = document.querySelector('.input-from');
 const inputTo = document.querySelector('.input-to');
@@ -30,7 +31,8 @@ form.addEventListener('submit', (event) => {
   if (answer === null || inputText.value.trim() === '' || isNaN(value)) {
     resultText.textContent = 'Invalid Input';
   } else {
-    resultText.textContent = `${value} ${from} = ${answer} ${to}`;
+    // toPrecision keeps 6 significant digits, so tiny results (e.g. mg -> kg) aren't rounded to 0
+    resultText.textContent = `${value} ${from} = ${Number(answer.toPrecision(6))} ${to}`;
   }
   form.classList.add('hidden');
   resultSection.classList.remove('hidden');
@@ -89,28 +91,47 @@ function weight(value, from, to) {
       oz: 0.000035274,
     },
     g: {
-      mg: 1,
-      g: 0.001,
-      kg: 0.000001,
-      oz: 0.000035274,
+      mg: 1000,
+      g: 1,
+      kg: 0.001,
+      oz: 0.035274,
     },
     kg: {
-      mg: 1,
-      g: 0.001,
-      kg: 0.000001,
-      oz: 0.000035274,
+      mg: 1000000,
+      g: 1000,
+      kg: 1,
+      oz: 35.274,
     },
     oz: {
-      mg: 1,
-      g: 0.001,
-      kg: 0.000001,
-      oz: 0.000035274,
+      mg: 28349.5,
+      g: 28.3495,
+      kg: 0.0283495,
+      oz: 1,
     }
   }
+
+  const weight = weightConvert[from]?.[to]
+  if (weight === undefined) {
+    return null;
+  }
+  return weight * value;
 }
 
 function temperature(value, from, to) {
-  const celsius = (inputText - 32) * 5/9;
-  const fahrenheit = (inputText * 9/5) + 32;;
-  const kelvin = 273 + inputText;
+  // Convert the input to Celsius first, then from Celsius to the target unit
+  const toCelsius = {
+    c: (v) => v,
+    f: (v) => (v - 32) * 5 / 9,
+    k: (v) => v - 273.15
+  };
+  const fromCelsius = {
+    c: (v) => v,
+    f: (v) => (v * 9 / 5) + 32,
+    k: (v) => v + 273.15
+  };
+
+  if (!toCelsius[from] || !fromCelsius[to]) {
+    return null;
+  }
+  return fromCelsius[to](toCelsius[from](value));
 }
