@@ -68,6 +68,13 @@ function length(value, from, to) {
       km: 1
     }
   }
+  const checker = [];
+  const calculate = value * 
+
+  lengthConvert.map((convert) => {
+
+  })
+
 }
 
 function weight(value, from, to) {
