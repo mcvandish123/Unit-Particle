@@ -27,8 +27,11 @@ form.addEventListener('submit', (event) => {
   const to = inputTo.value.trim().toLowerCase();
 
   const answer = converter(value, from, to);
-
-  resultText.textContent = `${value} ${from} = ${answer} ${to}`;
+  if (answer === null || inputText.value.trim() === '' || isNaN(value)) {
+    resultText.textContent = 'Invalid Input';
+  } else {
+    resultText.textContent = `${value} ${from} = ${answer} ${to}`;
+  }
   form.classList.add('hidden');
   resultSection.classList.remove('hidden');
 });
@@ -62,19 +65,19 @@ function length(value, from, to) {
       km: 0.001
     },
     km: {
-      mm: 0.000001,
+      mm: 1000000,
       cm: 100000,
       m: 1000,
       km: 1
     }
   }
-  const checker = [];
-  const calculate = value * 
 
-  lengthConvert.map((convert) => {
+  const getLength = lengthConvert[from]?.[to];
 
-  })
-
+  if (getLength === undefined) {
+    return null;
+  }
+  return value * getLength;
 }
 
 function weight(value, from, to) {
